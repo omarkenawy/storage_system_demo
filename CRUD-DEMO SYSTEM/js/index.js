@@ -18,18 +18,21 @@ if (localStorage.getItem('product') != null) {
 }
 // var productList = [];
 function addProduct() {
-    var product = {
-        name: productNameInput.value,
-        price: productPriceInput.value,
-        category: productCategoryInput.value,
-        desc: productDescInput.value,
-        image: "images/" + productImageInput.files[0]?.name,
+    if (validation(productNameInput) && validation(productPriceInput) && validation(productCategoryInput) && validation(productDescInput) && validation(productImageInput)) {
+        var product = {
+            name: productNameInput.value,
+            price: productPriceInput.value,
+            category: productCategoryInput.value,
+            desc: productDescInput.value,
+            image: "images/" + productImageInput.files[0]?.name,
+        }
+        productList.push(product);
+        localStorage.setItem("product", JSON.stringify(productList));
+        alert(" ✅ Product has been added successfully!");
+        clearForm();
+        displayProduct();
     }
-    productList.push(product);
-    localStorage.setItem("product", JSON.stringify(productList));
-    alert(" ✅ Product has been added successfully!");
-    clearForm();
-    displayProduct();
+
 }
 
 function clearForm() {
@@ -102,3 +105,41 @@ function updateProduct() {
 }
 
 
+
+function validation(element) {
+
+
+    var regex = {
+        ProductName: /^[A-Z]\w{3,8}\s?\w{0,10}$/,
+        ProductPrice: /^([1-9][0-9]{3,4}|100000)$/,
+        ProductCategory: /^(Mobile|Tv|Laptop|Smart Watch)/i,
+        ProductDesc: /^[\w\s]{3,300}$/,
+        ProductImage: /^images\/(jpg)$/
+    }
+
+    if (element.id == 'ProductImage') {
+        if (regex[element.id].test(element.files[0]?.type)) {
+            element.classList.add('is-valid');
+            element.classList.remove('is-invalid');
+            return true;
+        } else {
+            element.classList.remove('is-valid');
+            element.classList.add('is-invalid');
+            element.nextElementSibling.classList.remove("d-none");
+            return false;
+        }
+    }
+
+
+    if (regex[element.id].test(element.value)) {
+        element.classList.add('is-valid');
+        element.classList.remove('is-invalid');
+        element.nextElementSibling.classList.add("d-none");
+        return true;
+    } else {
+        element.classList.remove('is-valid');
+        element.classList.add('is-invalid');
+        element.nextElementSibling.classList.remove("d-none");
+        return false;
+    }
+}
