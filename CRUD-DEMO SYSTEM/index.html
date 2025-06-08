@@ -14,23 +14,34 @@
     <div class="storeInputs w-75 mx-auto">
         <h4>Please enter product Info:</h4>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="ProductName" placeholder="name@example.com">
+            <input type="text" oninput="validation(this)" class="form-control" id="ProductName"
+                placeholder="name@example.com">
+            <div class="alert alert-danger py-1 d-none">Your product name must begin with capital letter and contain
+                from 3-10 characters </div>
             <label for="ProductName">Product Name</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="ProductPrice" placeholder="name@example.com">
+            <input type="number" oninput="validation(this)" class="form-control" id="ProductPrice"
+                placeholder="name@example.com">
+            <div class="alert alert-danger py-1 d-none">Your product price should start from 100 to 10000 </div>
             <label for="ProductPrice">Product Price</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="ProductCategory" placeholder="name@example.com">
+            <input type="text" oninput="validation(this)" class="form-control" id="ProductCategory"
+                placeholder="name@example.com">
+            <div class="alert alert-danger py-1 d-none">Your product categorymust be Mobile or Tv or Laptop or Smart
+                Watch </div>
             <label for="ProductCategory">Product Category</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="file" class="form-control" id="ProductImage" placeholder="name@example.com">
+            <input type="file" oninput="validation(this)" class="form-control" id="ProductImage"
+                placeholder="name@example.com">
             <label for="ProductImage">Product Image</label>
         </div>
         <div class="form-floating mb-3">
-            <textarea type="text" class="form-control" id="ProductDesc" placeholder="name@example.com"></textarea>
+            <textarea type="text" oninput="validation(this)" class="form-control" id="ProductDesc"
+                placeholder="name@example.com"></textarea>
+
             <label for="ProductDesc">Product Desc</label>
         </div>
         <button onclick="addProduct()" class="btn btn-primary" id="addBttn" type="submit">Add Product </button>
